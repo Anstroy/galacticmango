@@ -1,0 +1,172 @@
+<section class="main">
+
+    <nav>
+        <a class="show-menu"></a>
+        
+        <h1>{{'Branding' | i18next}}</h1>
+    </nav>
+
+	
+	<form id="form-vertical">
+
+		<div class="form-group">
+			<label class="control-label">{{'Logo' | i18next}}</label>
+
+			<div>
+                <span
+                	ng-click="showAddImage('logo')"
+                	class="placeholder">
+                    <img ng-if="logoUrl != null" 
+                    	ng-src="{{logoUrl}}">
+                </span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">{{'Mobile Logo' | i18next}}</label>
+
+			<div>
+                <span
+                	ng-click="showAddImage('alt')"
+                	class="placeholder">
+                    <img ng-if="altLogoUrl != null" 
+                    	ng-src="{{altLogoUrl}}">
+                </span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">{{'PayPal Logo' | i18next}}</label>
+
+			<div>
+                <span
+                	ng-click="showAddImage('paypal')"
+                	class="placeholder">
+                    <img ng-if="payPalLogoUrl != null" 
+                    	ng-src="{{payPalLogoUrl}}">
+                </span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">{{'Touch / Tile / Favorite' | i18next}}</label>
+
+			<div>
+                <span
+                	ng-click="showAddImage('icon')"
+                	class="placeholder touch">
+                    <img ng-if="iconUrl != null" 
+                    	ng-src="{{iconUrl}}">
+                </span>
+                <small>200px x 200px ({{'png_to_ico' | i18next}})</small>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">{{'Tile Background' | i18next}}</label>
+
+			<div>
+				<input id="iconBg" type="text" 
+					ng-model="site.IconBg" class="form-control inline">
+				<button class="btn btn-default" 
+					ng-click="updateIconBg()">{{'Update' | i18next}}</button>
+                <small>{{'background_windows8' | i18next}}</small>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">{{'QR Code' | i18next}}</label>
+
+			<div>
+				<qrcode version="4" 
+					error-correction-level="M" 
+					size="280" 
+					data="{{site.Domain}}" href="{{site.Domain}}"></qrcode>
+			</div>
+		</div>
+	
+	</form>
+	<!-- /.form-horizontal -->
+
+</section>
+<!-- /.main -->
+
+<div class="modal fade" id="imagesDialog">
+
+	<!-- messages -->
+	<input id="msg-enter-caption" value="{{'Enter caption' | i18next}}" type="hidden">
+	<input id="msg-image-instructions" value="{{'add_content_change_image' | i18next}}" type="hidden">
+	
+	<div class="modal-dialog">
+	
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>{{'Select or upload a new image' | i18next}} <small>{{totalSize}} / {{fileLimit}} MB</small></h3>
+			</div>
+			<!-- /.modal-header -->
+			
+			<menu>
+    
+		    	<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+				    <span id="load-image">{{'Existing Image' | i18next}}</span>
+				    <span class="caret"></span>
+				  </button>
+				  <ul id="images-dropdown" class="dropdown-menu dropdown-auto" role="menu" aria-labelledby="image-types" data-display="#load-image">
+			  		<li class="active" data-target=".add-existing-image"><a>{{'Existing Image' | i18next}}</a></li>
+					<li data-target=".upload-new-image"><a>{{'Upload new Image' | i18next}}</a></li>
+				  </ul>
+				</div>
+		    </menu>
+		
+			<div class="modal-body">
+				
+				<div class="upload-new-image hidden">
+					<div id="drop" 
+						ng-if="totalSize <= fileLimit"
+						class="dropzone in-dialog" drop-zone target="branding" callback="updateImages()">
+					    <span class="dz-message">
+					        <i class="fa fa-cloud-upload fa-4x"></i> {{'Drag file here or click to upload' | i18next}}</span>
+					    </span>
+					</div>
+					<!-- /.dropzone -->
+				</div>
+				<!-- /.add-external-image -->
+			
+				<div class="add-existing-image">
+					<div id="select-image" class="select select-xl">
+						<ul>
+						    <li class="image existing" ng-repeat="image in images" ng-click="addImage(image)">
+						        <img 
+						        	ng-src="{{image.thumbUrl}}" width="100">
+						        <span class="select-block">
+						        	{{image.filename}}
+									<em>{{image.width}}px x {{image.height}}px</em>
+						        </span>
+						    </li>
+						</ul>
+					</div>
+					<!-- /.select -->
+					
+				</div>
+				<!-- /.add-existing-image -->
+				
+			</div>
+			<!-- /.modal-body -->
+			
+			<div class="modal-footer add-external-image hidden">
+				<button class="secondary-button" data-dismiss="modal">{{'Close' | i18next}}</button>
+				<button type="button" class="primary-button" ng-click="addExternalImage()">{{'Add' | i18next}}</button>
+			</div>   
+			 <!-- /.modal-footer -->
+			
+		</div>
+		<!-- /.modal-conten -->
+	
+	</div>
+	<!-- /.immersive-body -->
+
+</div>
+<!-- /.modal -->

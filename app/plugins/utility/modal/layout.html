@@ -1,0 +1,29 @@
+<div class="modal immersive fade" id="layoutDialog">
+
+	<div class="immersive-header">
+		<h3>
+			{{'Select Layout' | i18next}}
+		</h3>
+		<button type="button" class="close" data-dismiss="modal">x</button>
+	</div>
+	<!-- /.immersive-header -->
+	
+	<div class="immersive-body full layouts">
+
+		<button ng-repeat="snippet in snippets" 
+			data-id="{{snippet.id}}"
+			data-prefix="{{snippet.prefix}}">
+			
+				<img ng-src="snippets/{{snippet.id}}/screenshot.png">
+				
+				<small>
+					{{snippet.name | i18next}}
+				</small>
+		
+		</button>
+
+  </div>
+  <!-- /.immersive-body -->
+  
+</div>
+<!-- /.modal -->

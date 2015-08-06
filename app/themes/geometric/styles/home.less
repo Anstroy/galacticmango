@@ -1,0 +1,135 @@
+body.home .container{
+	max-width: 100%;
+  	padding: 0;
+  	z-index: 1;
+}
+
+body.home .container .row{
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+/* jumbotron */
+body.home .container .jumbotron{
+  	position: relative;
+  	box-sizing: border-box;
+  	background-size: 67px 100px;
+  	border-radius: 0 !important;
+  	color: config(--jumbotron-text-color);
+  	max-width: 100%;
+  	margin: 50px 0 0 0;
+  	padding: 150px 0 0 0;
+  	z-index: 1;
+}
+
+body.home .container .jumbotron .col-md-12{
+	margin: 0;
+  	padding: 0;
+}
+
+body.home .jumbotron h1, 
+body.home .jumbotron h2{
+	color: config(--jumbotron-text-color);
+  	font-size: 60px;
+  	text-align: center;
+  	margin-bottom: 25px;
+}
+
+body.home .jumbotron h3{
+  	background-color: config(--jumbotron-alternate-background-color);
+  	text-align: center;
+  	margin: 150px 0 0 0;
+  	padding: 20px 0;
+  	font-size: 15px;
+  	text-transform: uppercase;
+  	color: config(--jumbotron-alternate-text-color);
+}
+
+body.home .jumbotron p{
+	color: #fff;
+  	font-size: 20px;
+  	text-align: center;
+  	margin-bottom: 50px;
+}
+
+body.home .jumbotron p:last-child{
+	margin-bottom: 0;
+}
+
+body.home .jumbotron a, 
+body.home .jumbotron a:hover{
+	color: #fff;
+  	border: 1px solid #fff;
+  	padding: 12px 30px;
+}
+
+body.home .container blockquote{
+	border-left: 0;
+  	text-align: center;
+  	font-size: 18px;
+  	line-height: 24px;
+  	color: #888;
+}
+
+/* nested container */
+body.home .container .container{
+	border-bottom: 1px solid #ddd;
+  	padding-bottom: 15px;
+  	padding-top: 15px;
+  	background-size: 67px 100px;
+}
+
+body.home .container .container:last-child{
+	border-bottom: none;
+}
+
+body.home .container .container .respond-image img{
+	border: none;
+}
+
+body.home footer{
+	margin-top: 0;
+}
+
+/* nested container */
+body.home .container .container i.fa{
+  	display: inline-block;
+  	width: 50px;
+  	height: 50px;
+  	line-height: 50px;
+  	text-align: center;
+	background-color: #9EA6B1;
+  	color: #fff;
+  	border-radius: 50%;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+	body.home aside.call-to-action a{
+  		display: inline-block;
+	}
+	
+	body.home .container{
+		width: 100%;
+	}
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+
+	body.home .container{
+		width: 100%;
+	}
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
+	body.home .container{
+		width: 100%;
+	}
+
+}
