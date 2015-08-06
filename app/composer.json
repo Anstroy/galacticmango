@@ -1,0 +1,12 @@
+{
+    "config": {
+        "vendor-dir": "api/vendor"
+    },
+    "require": {
+    	"phpmailer/phpmailer": "5.2.8",
+    	"peej/tonic": "3.2",
+        "leafo/lessphp": "0.4.0",
+    	"guzzlehttp/guzzle": "~5.0",
+        "firebase/php-jwt": "dev-master"
+    }
+}

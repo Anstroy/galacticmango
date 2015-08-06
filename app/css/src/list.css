@@ -1,0 +1,541 @@
+/* begin list */
+div.list.has-dropzone{
+    margin-right: 200px;    
+    min-height: 400px;
+}
+
+.listItem{
+	position: relative;
+	border-bottom: 1px solid #eee;
+	padding: 20px 20px;
+	margin: 0;
+}
+
+	.listItem.expired{
+		background-color: rgba(201,44,41,.1);
+	}
+	
+	.listItem.expired h2 a, .listItem.expired span a, .listItem.expired span, .listItem.expired em{
+		color: rgba(201,44,41,1);
+	}
+	
+	.listItem.expired .remove{
+		background-color: rgba(201,44,41,1);
+	}
+	
+	.listItem.expired .status{
+		font-weight: bold;
+	}
+
+	div.list.has-photo .listItem{
+		min-height: 105px;
+		padding-left: 105px;
+		padding-top: 27px;
+	}
+
+.listItem:last-child{
+  	border-bottom: none;
+}
+
+.listItem h2{
+	line-height: 1em;
+	margin: 0;
+	padding: 0 0 5px 0;
+	font-size: 1.25em;
+	font-weight: bold;
+	width: 80%;
+	color: #888;
+	background: none;
+	border: none;
+}
+
+.listItem small{
+	display: block;
+	padding: 5px 0 5px 0;
+	color: #aaa;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+	.listItem small .tags{
+		display: inline-block;
+		margin-left: 10px;	
+	}
+	
+	.listItem small .tags i{
+		margin-right: 5px;
+	}
+
+.listItem.sortable h2{
+  	margin-left: 20px;
+}
+
+.listItem h2 a{
+    display: inline-block;
+}
+
+	.listItem h2 a.hasDraft{
+		font-style: italic;
+	}
+
+.listItem .draft-tag{
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.listItem h2 small{
+    font-weight: normal;
+    font-size: 0.75em;
+    margin-left: 10px;
+}
+
+.listItem p{
+	width: 80%;
+	margin: 0;
+	padding: 0 0 2px 0;
+	color: #888;
+}
+
+.listItem p.lastUpdated, .listItem em{
+	color: #ccc;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: uppercase;
+}
+
+
+div.placeholder{
+	height: 40px;
+	border: 1px solid #fbec5d !important;
+	background: #fbec5d !important;
+} 
+
+.listItem.sortable{
+	padding-left: 40px;
+}
+
+.listItem span.hook{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	display: block;
+	width: 25px;
+	height: 25px;
+	background: #f0f0f0;
+	line-height: 25px;
+	color: #aaa;
+	text-align: center;
+}
+
+.listItem span.hook:hover{
+	cursor: n-resize;
+	background: #f0f0f0 url('../images/app-sprite.png') no-repeat -100px 0;
+}
+
+.listItem.has-thumb{
+	min-height: 110px;
+}
+
+.listItem.has-thumb h2, .listItem.has-thumb p, .listItem.has-thumb em, .listItem.has-thumb small{
+	margin-left: 90px;
+}
+
+.listItem span.image{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+} 
+
+.listItem span.image img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 2px solid #f8f8f8;
+    margin-top: -2px;
+}
+
+.listItem span.icon{
+	position: absolute;
+	top: 15px;
+	left: 60px;
+}
+
+div#pageFileList .listItem span.icon{
+	left: 15px;
+}
+
+.listItem a.switchSite{
+	position: absolute;
+	top: 15px;
+	right: 15px;  
+	display: block;
+	width: 20px;
+	height: 50px;
+	border: 1px solid #ccc;
+}
+
+.listItem a.switchSite.selected{
+  	background: #fbec5d;
+}
+
+.listItem p.size{
+	font-size: 12px;
+	color: #888;
+	line-height: 17px;
+}
+
+.listItem button{
+	position: absolute;
+	top: 15px;
+	right: 20px;
+}
+
+button.update-photo{
+	box-sizing: border-box;
+	right: auto;
+	left: 20px;
+	width: 65px;
+	height: 65px;
+	padding-top: 4px;
+	background-color: #fff;
+	border: 2px dashed #eee;
+	border-radius: 50%;
+	color: #ccc;
+	font-size: 10px;
+	text-transform: uppercase;
+	outline: none;
+}
+
+	button.update-photo.has-photo{
+		border: none;
+		background-size:cover;
+	}
+
+	button.update-photo.has-photo span{
+		display: none;
+	}
+
+	button.update-photo:hover{
+		border-color: #3299BB;
+	}
+
+
+/* begin images */
+div#imageList .listItem span.field{
+ 	margin-left: 10px;
+}
+
+div#imageList .listItem span.field input{
+	 width: 300px;
+}
+
+div#imageList .listItem img{
+  	margin-bottom: 10px;
+}
+
+.list-loading, .list-none{
+    padding: 30px 20px 20px 20px;
+    color: #ccc;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.list-instructions{
+	margin: 20px;
+}
+
+/* begin actions */
+.listItem .remove{
+	position: absolute;
+	top: 19px;
+	right: 20px;
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	text-align: center;
+	color: #fff;
+	background-color: #ddd;
+	line-height: 22px;
+	border-radius: 50%;
+}
+
+	.listItem .remove i{
+		padding-top: 5px;
+		font-size: 14px;
+	}
+
+
+	.editing .remove{
+		display: none;
+	}
+
+	.listItem .remove:hover{
+	    background-color: #B11623;
+	    text-decoration: none;
+	}
+
+.listItem .edit{
+	position: absolute;
+	top: 20px;
+	right: 42px;
+	display: inline-block !important;
+	width: 25px !important;
+	height: 25px !important;
+	color: #ccc;
+}
+
+.listItem .edit:hover{
+    color: #ff9900;
+    text-decoration: none;
+}
+
+/* handles an editable mode for a list-item */
+.editable-selected{
+	position: absolute;
+	top: 20px;
+	right: 45px;
+	color: #fff;
+	background-color: #ff9900;
+	border-radius: 10px;
+	padding: 2px 10px;
+	font-size: 0.85em;
+	display: none;
+}
+
+	.editing .editable-selected{
+		display: block;
+	}
+
+.cancel-edit{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: #fff;
+	font-size: 0.85em;
+	color: #ff9900;
+	display: none;
+}
+
+	.editing .cancel-edit{
+		display: block;
+	}
+
+	.cancel-edit:hover{
+		color: #888;
+	}
+
+/* handles statuses */
+.listItem .status{
+	display: inline-block;
+	margin-right: 10px;
+	color: #888;
+}
+		
+/* menuItemsList */
+.nested-left, .nested-right{
+	font-size: 18px;
+	margin-right: 10px;
+	margin-left: 40px;
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	cursor: pointer;
+	float: left;
+}
+	.nested-left .fa-spin, .nested-right .fa-spin{
+		display: none;
+	}
+	
+	.nested-left.active .fa-spin, .nested-right.active .fa-spin{
+		display: inline-block;
+	}
+
+	.nested-left.active .arrow, .nested-right.active .arrow{
+		display: none;
+	}
+	
+	.nested-left i, .nested-right i{
+		color: #aaa;
+	}
+	
+	.nested-left:hover, .nested-right:hover{
+		background-color: #FF9900;
+	}
+	
+	.nested-left:hover i, .nested-right:hover i{
+		color: #fff;
+	}
+	
+	.nested-left{
+		display: none;
+		margin-left: 80px;
+	}
+	
+	.nested-right{
+		display: inline-block;
+	}
+	
+	.is-nested .nested-left{
+		display: inline-block;
+	}
+	
+	.is-nested .nested-right{
+		display: none;
+	}
+
+.listItem .url{
+	display: block;
+	color: #ccc;
+	font-weight: normal;
+	font-size: 13px;
+	margin-top: 5px;
+}
+
+/* image-list */
+.image-list{
+	margin: 0 15px;	
+}
+
+.image-item{
+	position: relative;
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+	margin: 15px 15px 15px 0;
+	border: 1px solid #ddd;
+}
+
+	.image-item h2{
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		font-size: 18px;
+		background-color: #fff;
+		border: none;
+		border-bottom: 1px solid #f0f0f0;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		z-index: 2;
+		font-size: 14px;
+		color: #888;
+		text-transform: uppercase;
+	}
+	
+	.image-item img{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 198px;
+		height: 198px;
+		z-index: 1;
+	}
+
+	.image-item div{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background-color: #fff;
+		color: #888;
+		border-top: 1px solid #f0f0f0;
+		font-size: 13px;
+		height: 35px;
+		line-height: 35px;
+		text-align: center;
+		z-index: 2;
+		cursor: pointer;
+	}
+	
+	.image-item div.secondary{
+		background-color: #f0f0f0;
+		color: #555;
+	}
+	
+		.image-item div:hover{
+			background-color: #fff;
+			color: #555;
+		}
+		
+	.image-item .active-button{
+		display: none;
+	}
+	
+	.image-item .inactive-button{
+		display: block;
+	}
+	
+	.image-item.active .active-button{
+		display: block;
+	}
+	
+	.image-item.active .inactive-button{
+		display: none;
+	}
+	
+	.image-item.active h2{
+		background-color: #81b841 !important;
+		color: #fff;
+		border-bottom: 1px solid #81b841 !important;
+	}
+
+/* #usersList */
+#usersList .role{
+	display: inline-block;
+	background-color: #aaa;
+	border-radius: 20px;
+	padding: 2px 10px;
+	color: #fff;
+	font-size: 12px;
+	font-family: "Roboto", sans-serif;
+}
+
+	#usersList .role.admin{
+		background-color: #D25F37;
+	}
+	
+	#usersList .role.contributor{
+		background-color: #94D237;
+	}
+	
+/* sites list */
+#sitesList i{
+	color: #ccc;
+	margin-left: 5px;
+	font-size: 11px;
+}
+
+/* font awesome selection */
+#searchIcons{
+	margin-bottom: 10px;
+}
+
+div#selectIcon ul {
+	text-align: center;
+}
+
+div#selectIcon ul li {
+	display: inline-block;
+	margin: 3px;
+	padding: 5px;
+	border: 1px solid #F0F0F0;
+	text-align: center;
+	color: #111;
+	width: 15%;
+	min-height: 90px;
+	vertical-align: top;
+	font-size: 12px;
+}
+
+div#selectIcon ul li i {
+	display: block;
+	font-size: 25px;
+	text-align: center;
+	margin: 5px 0 0 0;
+	padding: 5px 0;
+}

@@ -1,0 +1,346 @@
+<dom-module id="respond-languages">
+
+	<style>
+		
+		.respond-languages-container{
+		  	position: fixed;
+		  	top: 0;
+		  	left: 0;
+		  	width: 100%;
+		  	padding: 0;
+		    text-transform: uppercase;
+		  	z-index: 100;
+		  	text-align: left;
+		  	margin-top: -400px;
+		  	z-index: 5;
+		  	background-color: #fff;
+		  	z-index: 10000;
+		  	min-height: 70px;
+		  	line-height: auto;
+			transition: .35s all ease;
+			box-shadow: 1px 2px 3px rgba(119,119,119,0.25);
+		}
+		
+			.respond-languages-container[visible]{
+				margin-top: 0;
+			}
+			
+			.respond-languages-container svg{
+				width: 25px;
+			    height: 25px;
+			  	margin: 0;
+			  	padding: 0;
+			  	line-height: 25px;
+			  	display: inline-block;
+			  	vertical-align: middle;
+			  	fill: currentColor;
+			}
+			
+		/* close search */
+		.respond-languages-container .close-languages{
+			height: 40px;
+			width: 40px;
+			text-align: center;
+			color: #ccc;
+			position: absolute;
+			top: 15px;
+			right: 10px;
+		  	background: none;
+		  	border: none;
+		  	outline: none;
+		  	z-index: 10;
+		}
+		
+		/* loading */
+		.languages-loading{
+			display: none;
+			color: #888;
+			vertical-align: top;
+			width: 25px;
+			height: 25px;
+			margin-top: 0;
+			margin-left: 5px;
+		}
+		
+			.languages-loading[visible]{
+				display: inline-block;
+			}
+				
+			.languages-loading svg{
+				display: block;
+				vertical-align: top;
+				width: 25px;
+			    height: 25px;
+			  	margin: 0;
+			  	padding: 0;
+			  	line-height: 25px;
+			  	display: inline-block;
+			  	vertical-align: middle;
+			  	text-align: center;
+			  	fill: currentColor;
+			}
+	    
+	    /* select language */
+	    .select-language{
+		    display: inline-block;
+		    padding-left: 15px;
+		    height: 70px;
+		    line-height: 70px;
+	    }
+	    
+	    .select-language label{
+		    display: none;
+		    margin-right: 5px;
+			height: 50px;
+			line-height: 50px;
+			font-size: 0.95em;
+	    }
+	    
+	    .select-language label.direction{
+		    margin-left: 15px;
+	    }
+
+		.select-language a[active]{
+			background-color: #f0f0f0;
+		}
+		
+		/* Small devices (tablets, 768px and up) */
+		@media (min-width: 600px) {
+		
+			.select-language label{
+			    display: inline-block;
+		    }
+			
+		}
+		
+    </style>
+
+	<template>
+	
+		<div class="respond-languages-container" visible$="{{showLanguages}}">
+	
+			<button class="close-languages" on-click="close"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></g></svg></button>
+			
+			<div class="select-language">
+				<label>{{label.language}}</label>
+				
+				<span class="languages-loading" visible$="{{loading}}">
+					<!-- ack: https://github.com/jxnblk/loading --> 
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g><path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"/><path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z"><animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="0.8s" repeatCount="indefinite" /></path></g></svg>
+				</span>
+				
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<span>{{currentLanguageDisplay}}</span> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<template id="languagesList" is="dom-repeat" items="{{languages}}">
+							<li><a active$="{{item.isCurrentLanguage}}" on-click="setLanguage">{{item.language}}</a></li>
+						</template>
+					</ul>
+				</div>
+				
+				<label class="direction">{{label.direction}}</label>
+				
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<span>{{currentDirection}}</span> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a active$="{{isLTR}}" on-click="setLtr">LTR</a></li>
+						<li><a active$="{{isRTL}}" on-click="setRtl">RTL</a></li>
+					</ul>
+				</div>
+				
+				
+				
+			</div>
+			
+		</div>
+	
+	</template>
+</dom-module>
+
+<script>
+  Polymer({
+	  	is: "respond-languages",
+	
+	  	// element attributes
+	  	properties: {},
+		
+		// attached
+		attached: function() {
+		
+			// labels
+			this.label = {
+				language: this.i18n('Language'),
+				direction: this.i18n('Direction')
+			};
+			
+			// defaults
+			this.languages = [];
+			this.showLanguages = false;
+			this.isLTR = true;
+			this.isRTL = false;
+			  
+			// set context  
+			var context = this;
+		  	
+		  	this.currentLanguage = respond.site.settings.Language;
+		  	this.currentDirection = respond.site.settings.Direction;
+		  	
+		  	// get current language from session
+		  	if(sessionStorage['respond-language'] != null){
+				this.currentLanguage = sessionStorage['respond-language'];
+			}
+			
+			// get current direction from session
+			if(sessionStorage['respond-direction'] != null){
+				this.currentDirection = sessionStorage['respond-direction'];
+			}
+			
+			// set LTR/RTL
+		  	if(this.currentDirection == 'ltr'){
+			  	this.isLTR = true;
+			  	this.isRTL = false;
+		  	}
+		  	else{
+			  	this.isLTR = false;
+			  	this.isRTL = true;
+		  	}
+			
+			// create a display for languages
+		  	this.currentLanguageDisplay = this.i18n(this.currentLanguage);
+			
+		  	// wait for toggle
+		  	var items = document.querySelectorAll('respond-languages-toggle');
+			
+		  	for(x=0; x<items.length; x++){
+				
+				items[x].addEventListener('languages-toggled', function(e) {
+					
+					if(context.showLanguages == true){
+						context.close();
+					}
+					else{
+						context.open();
+					}
+					
+				});
+				  
+			}  
+			  
+		
+		},
+		
+		// opens the languages
+		open: function(){
+		
+			this.showLanguages = true;
+			
+			if(this.languages.length == 0){
+				this.loading = true;
+			
+				// set context
+				var context = this;
+			
+				// set params
+				var params = {
+					siteId: respond.site.settings.SiteId
+				}
+			
+				// set URI
+				var uri = respond.site.settings.API + '/translation/list/locales';
+			
+				var xhr = new XMLHttpRequest();
+				
+				xhr.open('POST', encodeURI(uri));
+				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				xhr.onload = function() {
+					if(xhr.status === 200){
+						var data = JSON.parse(xhr.responseText);
+						context.languages = [];
+						
+						// set current language
+						for(x=0; x<data.length; x++){
+							
+							if(data[x] == context.currentLanguage){
+								context.push('languages', {
+									'language': data[x],
+									'isCurrentLanguage': true
+								});
+								
+							}
+							else{
+								
+								context.push('languages', {
+									'language': data[x],
+									'isCurrentLanguage': false
+								})
+								
+							}
+						}
+						
+						
+						context.loading = false;
+					}
+					else if(xhr.status !== 200){
+						context.loading = false;
+						console.log('[respond.error] respond-languages component: failed post, xhr.status='+xhr.status);
+					}
+				};
+			
+				// serialize the data
+				var qs = [];
+			
+				for(p in params){
+					qs.push(encodeURIComponent(p) + "=" + encodeURIComponent(params[p]));
+				}
+			
+				qs = qs.join("&");
+			
+				// send serialized data
+				xhr.send(encodeURI(qs));
+			
+			}
+		  
+		},
+		
+		// closes the languages
+		close: function(){
+		
+			this.showLanguages = false;
+		  
+		},
+		
+		// sets the language
+		setLanguage: function(e){
+		  
+		  	var item = this.$.languagesList.itemForElement(e.target);
+		  
+		  	respond.site.setLanguage(item.language);
+		  
+		  	location.reload();
+		  
+		},
+		
+		// set LTR direction
+		setLtr: function(){
+		  	respond.site.setDirection('ltr');
+		  
+		  	location.reload();
+		},
+		
+		// set RTL direction
+		setRtl: function(){
+		  	respond.site.setDirection('rtl');
+		  
+		  	location.reload();
+		},
+		
+		i18n: function(text){
+		  	return respond.site.i18n(text);
+		}
+	
+	});
+</script>

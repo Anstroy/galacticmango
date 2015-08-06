@@ -1,0 +1,289 @@
+<dom-module id="respond-form">
+
+	<style>
+
+		/* messages */
+		.success, .error{
+			display: none;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			padding: 10px 15px;
+			font-size: 16px;
+			margin: 0 0 0 15px;
+		}
+		
+			.success[visible], .error[visible]{
+				display: inline-block;
+			}
+		
+		.error{
+			border: 1px solid #CF4647;
+			color: #fff;
+			background-color: #CF4647;
+		}
+		
+		.success{
+			border: 1px solid #08B168;
+			color: #fff;
+			background-color: #08B168;
+		}
+		
+		/* loading */
+		.loading{
+			display: none;
+			color: #888;
+			vertical-align: top;
+			width: 25px;
+			height: 25px;
+			margin-top: 5px;
+			margin-left: 5px;
+		}
+		
+			.loading[visible]{
+				display: inline-block;
+			}
+		
+			.loading svg{
+				display: block;
+				vertical-align: top;
+				width: 25px;
+			    height: 25px;
+			  	margin: 0;
+			  	padding: 0;
+			  	line-height: 25px;
+			  	display: inline-block;
+			  	vertical-align: middle;
+			  	text-align: center;
+			  	fill: currentColor;
+			}
+		
+	</style>
+
+	<template>
+	
+		<div id="container">
+	    	<form id$="{{formid}}">
+	    		<content id="content"></content>
+	    	</form>
+	    </div>
+	
+		<button type="button" class="btn btn-primary" 
+			on-click="submitForm">{{submit}}</button>
+			
+		<span class="loading" visible$="{{loading}}">
+			<!-- ack: https://github.com/jxnblk/loading --> 
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g><path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"/><path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z"><animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="0.8s" repeatCount="indefinite" /></path></g></svg>
+		</span>
+		
+		<span class="success" visible$="{{showSuccess}}">{{success}}</span>
+		
+		<span class="error" visible$="{{showError}}">{{error}}</span>
+	
+	</template>
+</dom-module>
+
+<script>
+  Polymer({
+	  	is: "respond-form",
+	
+	  	// element attributes
+	  	properties: {
+	  		formid: { type: String },
+	  		type: { type: String },
+	  		action: { type: String },
+	  		success: { 
+	  			type: String, 
+	  			value: 'Form submitted successfully'
+	  		},
+	  		error: { 
+	  			type: String, 
+	  			value: 'There was an error submitting your form' 
+	  		},
+	  		submit: { 
+	  			type: String,
+	  			value: 'Submit'
+	  		}
+		},
+		
+		// attached
+		attached: function() {
+		
+			// defaults
+			this.loading = false;
+			this.showSuccess = false;
+			this.showError = false;
+		
+			// translate messages
+			this.success = this.i18n(this.success);
+			this.error = this.i18n(this.error);
+			this.submit = this.i18n(this.submit);
+		},
+		
+		// handles the form submit
+		submitForm: function(event, detail, sender){
+			
+			// init messages
+			this.showSuccess = false;
+			this.showError = false;
+			this.loading = false;
+			
+			// select all inputs in the local DOM
+			var groups = Polymer.dom(this).querySelectorAll('.form-group');
+			
+			// initialize params
+			var params = {};
+			
+			// get page information
+			var pageId = document.body.getAttribute('page');
+			var siteId = respond.site.settings.SiteId;
+			var api = respond.site.settings.API;
+			
+			// add page and site
+			params['pageId'] = pageId;
+			params['siteId'] = siteId;
+			params['formId'] = this.formid;
+			
+			// walk through inputs
+			for(x=0; x<groups.length; x++){
+				
+				// get name, id, type
+				var label = groups[x].getAttribute('data-label');
+				var id = groups[x].getAttribute('data-id');
+				var type = groups[x].getAttribute('data-type');
+				var required = groups[x].getAttribute('data-required');
+				
+				// get value by type
+				var value = '';
+				
+				if(type == 'text'){
+					value = groups[x].querySelector('input').value;
+				}
+				else if(type == 'textarea'){
+					value = groups[x].querySelector('textarea').value;
+				}
+				else if(type == 'radiolist'){
+					var radio = groups[x].querySelector('input[type=radio]:checked');
+					
+					if(radio != null){
+						value = radio.value;
+					}
+				}
+				else if(type == 'select'){
+					value = groups[x].querySelector('select').value;
+				}
+				else if(type == 'checkboxlist'){
+					var checkboxes = groups[x].querySelectorAll('input[type=checkbox]:checked');
+					
+					// create comma separated list
+					for(y=0; y<checkboxes.length; y++){
+						value += checkboxes[y].value + ', ';
+					}
+					
+					// remove trailing comma and space
+					if(value != ''){
+						value = value.slice(0, -2);
+					}
+				}
+				
+				params[id] = value;
+				
+				// check required fields
+				if(required == 'true' && value == ''){
+					this.showError = true;
+					groups[x].className += ' has-error';
+				}
+				
+			}
+			
+			// exit if error
+			if(this.showError == true){
+				return false;
+			}
+			
+			// set loading
+			this.loading = true;
+			
+			// set context
+			var context = this;
+			
+			// submit form
+			var xhr = new XMLHttpRequest();
+			
+			// set URI
+			var uri = api + '/form';
+			
+			xhr.open('POST', encodeURI(uri));
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.onload = function() {
+			    if(xhr.status === 200){
+			    	// clear form, hide loading
+			    	context.loading = false;
+			    	context.showSuccess = true;
+			    	context.clearForm();
+			    }
+			    else if(xhr.status !== 200){
+			    	context.loading = false;
+			        console.log('[respond.error] respond-form component: failed post, xhr.status='+xhr.status);
+			    }
+			};
+			
+			// serialize the data
+		    var qs = [];
+		    
+		    for(p in params){
+			    qs.push(encodeURIComponent(p) + "=" + encodeURIComponent(params[p]));
+		    }
+		    
+		    qs = qs.join("&");
+		    
+			// send serialized data
+			xhr.send(encodeURI(qs));
+			
+		},
+		
+		// clears the form on submit
+		clearForm:function(){
+		
+			// clear text fields
+			var els = Polymer.dom(this).querySelectorAll('input[type=text]');
+			
+			for(x=0; x<els.length; x++){
+				els[x].value = '';
+			}
+			
+			// clear text ares
+			var els = this.querySelectorAll('textarea');
+			
+			for(x=0; x<els.length; x++){
+				els[x].value = '';
+			}
+			
+			// clear checkboxes
+			var els = Polymer.dom(this).querySelectorAll('input[type=checkbox]');
+			
+			for(x=0; x<els.length; x++){
+				els[x].checked = false;
+			}
+			
+			// clear radios
+			var els = Polymer.dom(this).querySelectorAll('input[type=radio]');
+			
+			for(x=0; x<els.length; x++){
+				els[x].checked = false;
+			}
+			
+			// reset selects
+			var els = Polymer.dom(this).querySelectorAll('select');
+			
+			for(x=0; x<els.length; x++){
+				els[x].selectedIndex = 0;
+			}
+			
+		},
+		
+		i18n: function(text){
+			return respond.site.i18n(text);
+		}
+	
+	});
+</script>

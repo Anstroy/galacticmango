@@ -1,0 +1,110 @@
+<dom-module id="respond-menu">
+	<template>
+  		<content></content>
+	</template>
+</dom-module>
+
+<script>
+  Polymer({
+	  	is: "respond-menu",
+	
+	  	// element attributes
+	  	properties: {
+	  		menuid: { type: String },
+	  		class: { type: String },
+	  		type: { type: String }
+		},
+		
+		// attached
+		attached: function() {
+		
+			var context = this;
+		
+			// xhr
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', encodeURI('data/menu-' + this.type + '.json'));
+			
+			xhr.onload = function() {
+			    if (xhr.status === 200) {
+			    
+			    	var data = JSON.parse(xhr.responseText);
+					var pageId = document.body.getAttribute('page');
+					var menu = '';
+					
+					var flagActive = false;
+					var flagParent = false;
+					
+					for(x=0; x<data.length; x++) {				
+						var item = data[x];
+						
+						if(data[x+1] != undefined) {
+							if (data[x+1].IsNested == 1) 	flagParent = true;		
+						}
+						if (item.PageId == pageId) 		flagActive = true;
+						
+						if (!flagParent) {
+							menu += '<li ' + ( flagActive ? 'class="active"' : '' ) + '>' +
+										'<a href="' + item.Url + '">' + item.Name + '</a>' +
+									'</li>';
+						} else {
+							var nestedMenu = '';
+	
+							for (y=x+1; y<data.length; y++) {
+								var flagNestedActive = false;
+								x=y;
+								var nestedItem = data[y];
+								
+								if (nestedItem.PageId == pageId) {
+									flagNestedActive = true;
+									flagActive = true;
+								}
+	
+								nestedMenu += 	'<li ' + ( flagNestedActive ? 'class="active"' : '' ) + '>' +
+											  		'<a href="' + nestedItem.Url + '">' + nestedItem.Name + '</a>' +
+												'</li>';							
+								
+								if(data[y+1] != undefined) {
+									if (data[y+1].IsNested != 1) break;	
+								}
+								
+								flagNestedActive = false;
+							}
+	
+							menu += '<li class="dropdown ' + ( flagActive ? 'active' : '' ) + '">' +
+										'<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' + item.Name +' <span class="caret"></span></a>' +
+										'<ul class="dropdown-menu">' +
+											nestedMenu +
+										'</ul>' +					
+									'</li>';						
+							
+						}
+						 
+						flagActive = false;
+						flagParent = false;						
+					}
+					
+					// create menu
+					var ul = document.createElement('ul');
+					ul.setAttribute('id', context.menuid);
+					ul.setAttribute('class', context.class);
+					ul.innerHTML = menu;
+					
+					// set in local dom
+					Polymer.dom(context).appendChild(ul);
+					
+			    }
+			    else {
+			        console.log('[respond.error] respond-menu component: failed post, xhr.status='+xhr.status);
+			    }
+			};
+			
+			xhr.send(); 
+			
+		},
+		
+		i18n: function(text){
+		  	return respond.site.i18n(text);
+		}
+	
+	});
+</script>

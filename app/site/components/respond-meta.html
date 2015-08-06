@@ -1,0 +1,114 @@
+<dom-module id="respond-meta">
+
+	<style>
+	  	.respond-meta-container{
+		  	position: relative;
+		  	height: 40px;
+		  	padding: 5px 5px 5px 0;
+	  	}
+	  	
+	  	.respond-meta-container.has-photo{
+		  	padding-left: 60px;
+	  	}
+	  	
+  		.respond-meta-container img{
+	  		position: absolute;
+	  		top: 5px;
+	  		left: 5px;
+  			display: block;
+  			border: none;
+  			height: 40px;
+  			width: 40px;
+  			border-radius: 50%;
+  		}
+  		
+  		.respond-meta-container p{
+	  		height: 40px;
+	  		line-height: 40px;
+	  		text-transform: uppercase;
+	  		font-size: 13px;
+	  		color: #888;
+	  		margin: 0;
+	  		padding: 0;
+  		}
+  	</style>
+
+
+  	<template></template>
+</dom-module>
+
+<script>
+  Polymer({
+	  	is: "respond-meta",
+	
+	  	// element attributes
+	  	properties: {
+	  		photo: { type: String }, 
+	  		first: { type: String },
+	  		last: { type: String },
+	  		date: { type: String }, 
+	  		url: { type: String }  
+		},
+		
+		// attached
+		attached: function() {
+			
+			// set labels 
+			this.label = {
+				lastModifiedBy: this.i18n('Last modified by'),
+				permanentLink: this.i18n('Permanent Link')
+			};
+			
+			this.hasPhoto = false;
+			
+			// set photo
+			if(this.photo != '' && this.photo != undefined && this.photo != null){
+				this.hasPhoto = true;
+				this.photo = respond.site.settings.ImagesUrl + 'files/thumbs/' + this.photo;
+			}
+			
+			// create meta
+			var div = document.createElement('div');
+			var cssClass = 'respond-meta-container';
+			
+			// add image
+			if(this.hasPhoto == true){
+				cssClass += ' has-photo';
+				
+				var image = document.createElement('img');
+				image.setAttribute('src', this.photo);
+				
+				div.appendChild(image);
+			}
+			
+			// add author information
+			var p = document.createElement('p');
+			p.innerHTML += this.label.lastModifiedBy + ' ' + this.first + ' ' + this.last + ' &ndash; ' + this.date;
+			
+			// add permanent link
+			if(this.url != '' && this.url != undefined){
+				var a = document.createElement('a');
+				a.setAttribute('href', this.url);
+				a.innerHTML = this.label.permanentLink;
+				
+				p.appendChild(a);
+			}
+			
+			// append span
+			div.appendChild(p);
+			
+			// set css class
+			div.setAttribute('class', cssClass);
+			
+			// apply to local dom
+			Polymer.dom(this.root).appendChild(div);
+			
+		},
+		
+		// translate  
+		i18n: function(text){
+			return respond.site.i18n(text);
+		}
+	
+	});
+</script>

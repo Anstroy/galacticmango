@@ -1,0 +1,69 @@
+<dom-module id="respond-content">
+	<template>
+  		<content></content>
+	</template>
+</dom-module>
+
+<script>
+  Polymer({
+	  	is: "respond-content",
+	
+	  	// element attributes
+	  	properties: {
+	  		url: { type: String },
+	  		contentid: { type: String },
+	  		cssclass: { type: String }
+		},
+		
+		// attached
+		attached: function() {
+			
+			// replace '/' with '.'
+			var find = '/';
+			var re = new RegExp(find, 'g');
+			var url = this.url.replace(re, '.');
+			
+			
+			var context = this;
+			
+			// xhr
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', encodeURI('templates/page/' + url + '.html'));
+			
+			xhr.onload = function() {
+			    if (xhr.status === 200) {
+			    
+			    	var data = xhr.responseText;
+			    
+			        // replace imagesURL with url
+					data = respond.site.replaceAll(data, '{{site.ImagesUrl}}', respond.site.settings.ImagesUrl);
+					data = respond.site.replaceAll(data, '{{site.ImagesURL}}', respond.site.settings.ImagesUrl);
+				
+					// place returned HTML into a node
+					var div = document.createElement('div');
+					
+					if(this.contentid != '' && this.contentid != undefined){
+						div.setAttribute('id', this.contentid);
+					}
+					
+					if(this.cssclass != '' && this.cssclass != undefined){
+						div.setAttribute('class', this.cssclass);
+					}
+					
+					div.innerHTML = data;
+					
+					// apply to light dom
+					Polymer.dom(context).appendChild(div);
+					Polymer.dom.flush()
+					
+			    }
+			    else {
+			        console.log('[respond.error] respond-content component: failed post, xhr.status='+xhr.status);
+			    }
+			};
+			xhr.send(); 
+		
+		}
+	
+	});
+</script>

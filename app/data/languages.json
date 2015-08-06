@@ -1,0 +1,26 @@
+[
+	{
+		"code": "en",
+		"text": "English (en-US)"
+	},
+	{
+		"code": "fr",
+		"text": "French (fr)"
+	},
+	{
+		"code": "de-DE",
+		"text": "German (de-DE)"
+	},
+	{
+		"code": "ja",
+		"text": "Japanese (ja)"
+	},
+	{
+		"code": "es-ES",
+		"text": "Spanish (es-ES)"
+	},
+	{
+		"code": "sq",
+		"text": "Albanian (sq)"
+	}
+]

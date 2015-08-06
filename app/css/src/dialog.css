@@ -1,0 +1,145 @@
+.modal-content{
+	border-radius: 0 !important;
+	box-shadow: none;
+	border-color: #888;
+}
+
+/* begin immersive dialog */
+.immersive{
+    box-sizing: border-box;
+	position: fixed; 
+	top: 0;
+	left: 0;
+	z-index: 50000;
+	display: none;
+	border: none;
+	margin: 0;
+	padding: 20px;
+    width: 100%;
+    height: 100%;
+    background: rgba(68,68,68,0.95);
+}
+
+.immersive-header{
+    position: relative;
+}
+
+    .immersive-header h3{
+    	position: relative;
+        color: #fff;
+        padding: 10px 10px;
+        position: relative;
+    }
+    
+     .immersive-header h3 span.size{
+		margin-left: 25px;
+		font-weight: normal;
+		font-size: 14px;
+		margin-left: 15px;
+     }
+    
+    .immersive-header button.close{
+        position: absolute;
+        top: -15px;
+        right: 0;
+        color: #fff;
+        opacity: 1;
+        text-shadow: none;
+    }
+    
+    .immersive-body{
+        margin-right: 200px;
+        height: 100%;
+        overflow: scroll;
+    }
+    
+    	.immersive-body.full{
+	    	margin-right: 0;
+    	}
+    
+    .immersive-body h2{
+        font-size: 1.2em;
+        color: #ccc;
+        padding: 10px 10px;
+    }
+
+.immersive-body h4{
+    color: #fff;
+    padding: 10px 10px;
+    margin: 0;
+}  
+
+.immersive-body p{
+    color: #ddd;
+    padding: 10px 10px 20px 10px;
+    margin: 0;
+}  
+    
+.imagesDialog .existing{
+    display: inline-block;
+}
+
+/* images dialog */
+.modal .image-list{
+	margin: 0;
+}
+
+.modal .image-list .image{
+    position: relative;
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #f0f0f0;
+}
+
+    .modal .image-list .image:hover{
+        border: 1px solid #fff;
+    }
+    
+    .modal .image-list .image.existing:hover{
+        border: 1px solid #ff9900;
+    }
+
+    .modal .image-list .image img{
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .modal .image-list .image small{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: block;
+        font-size: 0.85em;
+        background-color: #fff;
+        color: #888;
+        height: 40px;
+        display: none;
+    }
+    
+        .modal .image-list .image:hover small{
+            display: block;
+        }
+
+/* begin overlay */
+div#overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #404040;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity:.95; 
+  display: none;
+  z-index: 4999;
+}
+
+
