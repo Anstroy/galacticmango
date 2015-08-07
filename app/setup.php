@@ -5,7 +5,7 @@
 	/*********************************/
 
 	// DB connection parameters
-	define('DB_HOST', '31.170.166.176');
+	define('DB_HOST', 'mysql.nixiweb.com');
 	define('DB_NAME', 'u263108083_app');
 	define('DB_USER', 'u263108083_app1');
 	define('DB_PASSWORD', '3100203');
