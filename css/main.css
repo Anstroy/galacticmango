@@ -9,30 +9,33 @@ body {
     /*background-color: #2D2D2D;*/
 }
 
-div.post-info {
-    width: 700px;
-    margin: auto;
-    padding: 60px 20px 20px 20px;
-    color: #FFF;
+img.me-big
+{
+    
 }
 
-h1.post-title {
-    font-size: 4.5rem;
-    color: white;
-}
-.text-xs-center {
-    text-align: center!important;
-}
-div.post-image-container {
-    overflow: hidden;
+header.masthead {
+	background: url(https://wallpaperscraft.com/image/ipad_iphone_pens_notepads_coffee_starbucks_83901_2551x1549.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
     background-size: cover;
-    background-position: center;
-    position: relative;
-    height: 600px;
+    -o-background-size: cover;
 }
 
 @media (min-width: 992px) {
     body {
         padding-top: 56px;
     }
+}
+
+header.masthead > .overlay {
+    text-align: center;
+    padding: 15rem 0px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.display-1 {
+    font-size: 6rem;
+    font-weight: 300;
+    line-height: 1.2;
 }
