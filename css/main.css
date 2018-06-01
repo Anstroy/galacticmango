@@ -1,41 +1,101 @@
-/*!
- * Start Bootstrap - Shop Homepage (http://startbootstrap.com/template-overviews/shop-homepage)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
- */
-
 body {
-    padding-top: 54px;
-    /*background-color: #2D2D2D;*/
+background: #041221;
 }
-
-img.me-big
-{
-    
+.card.large {
+height: 600px;
+-webkit-backface-visibility: hidden;
+backface-visibility: initial;
+border-radius: 5px;
 }
-
-header.masthead {
-	background: url(https://wallpaperscraft.com/image/ipad_iphone_pens_notepads_coffee_starbucks_83901_2551x1549.jpg) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+.media-content {
+overflow: hidden;
 }
-
-@media (min-width: 992px) {
-    body {
-        padding-top: 56px;
-    }
+.title.no-padding {
+margin-bottom: 0 !important;
 }
-
-header.masthead > .overlay {
-    text-align: center;
-    padding: 15rem 0px;
-    background: rgba(0, 0, 0, 0.6);
+#flow span {
+display: block;
+width: 200vw;
+height: 200vw;
+position: absolute;
+top: -180vw;
+left: -50vw;
+border-radius: 90vw;
+opacity: 0.6;
 }
-
-.display-1 {
-    font-size: 6rem;
-    font-weight: 300;
-    line-height: 1.2;
+.flow-1 {
+background: #3281ff;
+-webkit-animation: rotating 20s linear infinite;
+-moz-animation: rotating 20s linear infinite;
+-ms-animation: rotating 20s linear infinite;
+-o-animation: rotating 20s linear infinite;
+animation: rotating 20s linear infinite;
 }
+.flow-2 {
+background: #f442ee;
+position: absolute;
+-webkit-animation: rotating 15s linear infinite;
+-moz-animation: rotating 15s linear infinite;
+-ms-animation: rotating 15s linear infinite;
+-o-animation: rotating 15s linear infinite;
+animation: rotating 15s linear infinite;
+}
+.flow-3 {
+background: #42eef4;
+position: absolute;
+-webkit-animation: rotating 7s linear infinite;
+-moz-animation: rotating 7s linear infinite;
+-ms-animation: rotating 7s linear infinite;
+-o-animation: rotating 7s linear infinite;
+animation: rotating 7s linear infinite;
+}
+@-webkit-keyframes rotating {
+from {
+-ms-transform: rotate(0deg);
+-moz-transform: rotate(0deg);
+-webkit-transform: rotate(0deg);
+-o-transform: rotate(0deg);
+transform: rotate(0deg);
+}
+to {
+-ms-transform: rotate(360deg);
+-moz-transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+}
+@keyframes rotating {
+from {
+-ms-transform: rotate(0deg);
+-moz-transform: rotate(0deg);
+-webkit-transform: rotate(0deg);
+-o-transform: rotate(0deg);
+transform: rotate(0deg);
+}
+to {
+-ms-transform: rotate(360deg);
+-moz-transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+}
+.rotating {
+-webkit-animation: rotating 2s linear infinite;
+-moz-animation: rotating 2s linear infinite;
+-ms-animation: rotating 2s linear infinite;
+-o-animation: rotating 2s linear infinite;
+animation: rotating 2s linear infinite;
+}
+.footer{
+background-color: #222831;
+color: lemonchiffon;
+}
+.footer p, strong
+{color: lemonchiffon}
+.footer a:hover
+{color: crimson;}
+.fa
+{color: lemonchiffon;
+    margin: 10px}
