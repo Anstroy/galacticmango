@@ -212,3 +212,87 @@ div.my-projects div.project-square p{
 .xd{
     background-color: #26041D;
 }
+
+.mobile {
+    display: none;
+}
+
+/* Mobile PART */
+@media only screen and (max-width: 650px) {
+    div.main-text h1{
+        letter-spacing: 2px;
+        font-size: 30px;
+    }
+
+    div.main-text p{
+        letter-spacing: 1px;
+        font-size: 12px;
+        margin: 40px auto;
+    }
+    
+    
+    div.main-text div.social{
+        font-size: 40px;
+    }
+    
+    div.main-text div.social a i{
+        font-size: 30px;
+    }
+    
+    div.main-text hr{
+        margin: 40px auto;
+        border: 3px solid white;
+        border-radius: 5px;
+        width: 60px;
+    }
+
+    .scroll-me{
+        font-size: 40px;
+    }
+
+    div.main-container{
+        height: 700px;
+    }
+
+    i.mobile-hide{
+        display: none;
+    }
+    
+    .mobile-hide{
+        display: none;
+    }
+
+    .mobile {
+        display: initial;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    div.my-projects{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 10%;
+    }
+    
+    div.my-projects div.project-square{
+        flex: 1 0 50%; /* explanation below */
+    }
+
+    div.container h1{
+        font-size: 30px;
+        letter-spacing: 3px;
+    }
+
+    div.container hr{
+        border: 5px solid #0C4268;
+        width: 70px;
+    }
+
+    div.footer{
+        height: 60em;
+    }
+    
+}
