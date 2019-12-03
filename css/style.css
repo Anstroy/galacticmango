@@ -4,6 +4,10 @@
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
 
 div.main-container{
     width: 100%;
@@ -29,7 +33,7 @@ div.front-opacity{
 div.main-text{
     margin: 0;
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
