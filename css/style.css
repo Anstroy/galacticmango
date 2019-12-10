@@ -1,0 +1,302 @@
+* {
+    margin: 0;
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+div.main-container{
+    width: 100%;
+    height: 1000px;
+    background: white url("/images/background.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    z-index: -2;
+}
+
+div.front-opacity{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    z-index: -1;
+    position: static;
+}
+
+div.main-text{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+div.main-text h1{
+    letter-spacing: 7px;
+    font-size: 60px;
+}
+
+div.main-text p{
+    letter-spacing: 1px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    margin: 40px auto;
+}
+
+
+div.main-text div.social{
+    font-size: 40px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+div.main-text div.social a i{
+    text-decoration: none;
+    color:white
+}
+
+div.main-text hr{
+    margin: 40px auto;
+    border: 5px solid white;
+    border-radius: 5px;
+    width: 250px;
+}
+
+div.divisor{
+    z-index: -1;
+    width: 100%;
+    height: 300px;
+    background: white;
+    margin-top: -10%;
+    transform: skewY(-8deg);
+}
+
+div.divisor2{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 300px;
+    background: white;
+    transform: skewY(-8deg);
+    margin-bottom: -10%;
+}
+
+div.container{
+    z-index: 0;
+    width: 100%;
+    position: relative;
+    background-color: white;
+    padding-top: 0px;
+    margin-top: -10%;
+    margin-bottom: 30px;
+}
+
+div.container h1{
+    color: #0C4268;
+    font-size: 40px;
+    letter-spacing: 5px;
+}
+
+div.container hr{
+    margin: 20px auto;
+    border: 5px solid #0C4268;
+    border-radius: 5px;
+    width: 250px;
+}
+
+
+div.footer{
+    padding-top: 30px;
+    height: 70em;
+    z-index: 2;
+    background-color: black;
+    color: white;
+    background: white url("/images/background.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+div.footer div.footer-content{
+    position: relative;
+    overflow: hidden;
+    margin-top: 20%;
+}
+
+div.footer div.footer-content h1{
+    letter-spacing: 4px;
+    font-size: 3em;
+}
+
+div.footer div.footer-content p{
+    letter-spacing: 2px;
+    font-size: 1.4em;
+}
+
+
+.scroll-me{
+    margin-top: 10%;
+    font-size: 60px;
+    animation: move 0.7s infinite alternate;
+}
+
+@keyframes move {
+    0% { /* from */
+        transform: translateY(0px);
+    }
+    100% { /* to */
+        transform: translateY(30px);
+    }
+}
+
+
+/* Projects */
+div.my-projects{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10%;
+}
+
+div.my-projects div.project-square{
+    flex: 1 0 31%; /* explanation below */
+    margin: 5px;
+    height: 100px;
+    color: white;
+    position: relative
+}
+
+div.my-projects div.project-square p{
+    font-size: 40px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.red{
+    background: #CC1901;
+}
+
+.blue{
+    background-color: #0C4268;
+}
+
+.green{
+    background-color: #39B982;
+}
+
+.pink{
+    background-color: #C76496;
+}
+
+.orange{
+    background-color: #E54D24;
+}
+
+.light-blue{
+    background-color: #32A9DC;
+}
+
+.yellow{
+    background-color: #EBBA21;
+}
+
+.xd{
+    background-color: #26041D;
+}
+
+.mobile {
+    display: none;
+}
+
+/* Mobile PART */
+@media only screen and (max-width: 650px) {
+    div.main-text h1{
+        letter-spacing: 2px;
+        font-size: 30px;
+    }
+
+    div.main-text p{
+        letter-spacing: 1px;
+        font-size: 12px;
+        margin: 40px auto;
+    }
+    
+    
+    div.main-text div.social{
+        font-size: 40px;
+    }
+    
+    div.main-text div.social a i{
+        font-size: 30px;
+    }
+    
+    div.main-text hr{
+        margin: 40px auto;
+        border: 3px solid white;
+        border-radius: 5px;
+        width: 60px;
+    }
+
+    .scroll-me{
+        font-size: 40px;
+    }
+
+    div.main-container{
+        height: 700px;
+    }
+
+    i.mobile-hide{
+        display: none;
+    }
+    
+    .mobile-hide{
+        display: none;
+    }
+
+    .mobile {
+        display: initial;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    div.my-projects{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 10%;
+    }
+    
+    div.my-projects div.project-square{
+        flex: 1 0 50%; /* explanation below */
+    }
+
+    div.container h1{
+        font-size: 30px;
+        letter-spacing: 3px;
+    }
+
+    div.container hr{
+        border: 5px solid #0C4268;
+        width: 70px;
+    }
+
+    div.footer{
+        height: 60em;
+    }
+    
+}
