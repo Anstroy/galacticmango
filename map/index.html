@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>South Texas College Maps</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body
+    
+    <img src="stc_logo.png" alt="STC" height="80" width="120" style="margin-left: 10px;">
+    <div id='map'>
+    </div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5zdHJveSIsImEiOiJjazZqZzJzcmEwYmlkM210a21yMGFkc3ljIn0.vWWt-xRqnil1ID07qDTqQw'; // replace this with your access token
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/anstroy/ck6jg5dog1a3f1ipb9dnsyyud', // replace this with your style URL
+      center: [-98.25492539999999, 26.219404899999997], // center initial location with STC's location
+      zoom: 16.2
+    });
+    // code from the next step will go here
+
+    // Add geolocate control to the map.
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+      positionOptions: {
+      enableHighAccuracy: true
+      },
+      trackUserLocation: true
+      })
+    );
+
+    map.on('click', function(e) {
+    var features = map.queryRenderedFeatures(e.point, {
+      layers: ['stc-places-labels'] // replace this with the name of the layer
+    });
+
+    if (!features.length) {
+      return;
+    }
+
+    var feature = features[0];
+
+    var popup = new mapboxgl.Popup({ offset: [0, -15] })
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(`
+          <h3>${feature.properties.title}</h3> 
+          <p>${feature.properties.description}</p>
+          <a href="http://maps.google.com/?q=${feature.geometry.coordinates[1]},${feature.geometry.coordinates[0]}">open in google maps</a>
+          `)
+        .addTo(map);
+    });
+
+    </script>
+  </body>
+</html>
