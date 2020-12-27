@@ -1,14 +1,14 @@
 const projects = [
     {
         id: "Countries-App",
-        title: "Vue + Appwrite",
+        title: "Vue + Supabase",
         desc:
-            "This small app, combines the power of Vue.js with Auth, CRUD operations, everything backed by Appwrite as a backend.",
+            "This small app, combines the power of Vue.js with Auth, CRUD operations, everything backed by Supabase as a backend.",
         latest: true,
         category: "web",
         tags: ["vue", "node", "appwrite", "tailwindcss"],
-        source: "https://github.com/Anstroy/countries-app",
-        live: "https://app-countries-vue.netlify.app/"
+        source: "https://github.com/Anstroy/countries-supabase",
+        live: "https://auscode.me/countries-supabase/"
     },
     {
         id: "Instagram-Bot",
