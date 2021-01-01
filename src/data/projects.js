@@ -6,9 +6,9 @@ const projects = [
             "This small app, combines the power of Vue.js with Auth, CRUD operations, everything backed by Supabase as a backend.",
         latest: true,
         category: "web",
-        tags: ["vue", "node", "appwrite", "tailwindcss"],
+        tags: ["vue", "node", "supabase", "tailwindcss"],
         source: "https://github.com/Anstroy/countries-supabase",
-        live: "https://auscode.me/countries-supabase/"
+        live: "https://vue-crud-supabase.netlify.app/"
     },
     {
         id: "Instagram-Bot",
