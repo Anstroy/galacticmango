@@ -1691,6 +1691,17 @@ var app = (function () {
 
     const projects = [
         {
+            id: "Alacena",
+            title: "Alacena Web Recipe Builder",
+            desc:
+                `This app will help you to find recipes with what you have at your fridge or "alacena"  (cupboard in Spanish). No download or annoying ads, just open the link with your phone, and you will be ready to start. Give it a try, it is totally free.`,
+            latest: true,
+            category: "web",
+            tags: ["vue", "node", "tailwindcss"],
+            source: "https://github.com/Anstroy/alacena-vue-3",
+            live: "https://alacena-e3ywj.ondigitalocean.app/"
+        },
+        {
             id: "Countries-App",
             title: "Vue + Supabase",
             desc:
