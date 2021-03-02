@@ -8,7 +8,7 @@ const projects = [
         category: "web",
         tags: ["vue", "node", "tailwindcss"],
         source: "https://github.com/Anstroy/alacena-vue-3",
-        live: "https://alacena.netlify.app/"
+        live: "https://cook.auscode.me/"
     },
     {
         id: "Countries-App",
@@ -19,7 +19,7 @@ const projects = [
         category: "web",
         tags: ["vue", "node", "supabase", "tailwindcss"],
         source: "https://github.com/Anstroy/countries-supabase",
-        live: "https://vue-crud-supabase.netlify.app/"
+        live: "http://vue-crud-supabase.auscode.me/"
     },
     {
         id: "Instagram-Bot",
