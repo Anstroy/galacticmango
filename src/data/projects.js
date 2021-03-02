@@ -8,7 +8,7 @@ const projects = [
         category: "web",
         tags: ["vue", "node", "tailwindcss"],
         source: "https://github.com/Anstroy/alacena-vue-3",
-        live: "https://alacena-e3ywj.ondigitalocean.app/"
+        live: "https://alacena.netlify.app/"
     },
     {
         id: "Countries-App",
